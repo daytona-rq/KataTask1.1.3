@@ -4,11 +4,18 @@ import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private UserDao userDao = new UserDaoJDBCImpl();
+    Connection connection;
+
+    public UserServiceImpl(Connection connection) {
+        this.connection = connection;
+    }
+
+    final UserDao userDao = new UserDaoJDBCImpl(connection);
 
     public void createUsersTable() {
         userDao.createUsersTable();
