@@ -10,12 +10,8 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-
-        Connection connection = null;
-
         try {
-            connection = Util.getConnection();
-            UserService userService = new UserServiceImpl(connection);
+            UserService userService = new UserServiceImpl();
             userService.createUsersTable();
             userService.saveUser("Elena", "Ivanova", (byte) 18);
             userService.saveUser("Mike", "Surova", (byte) 26);
@@ -24,10 +20,8 @@ public class Main {
             System.out.println(userService.getAllUsers());
             userService.cleanUsersTable();
             userService.dropUsersTable();
-        } catch (SQLException e) {
-            e.printStackTrace();
         } finally {
-            Util.closeConnection(connection);
+            Util.closeConnection();
         }
 
     }

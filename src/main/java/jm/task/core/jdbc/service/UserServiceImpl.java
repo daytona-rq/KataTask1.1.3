@@ -9,13 +9,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    Connection connection;
-
-    public UserServiceImpl(Connection connection) {
-        this.connection = connection;
-    }
-
-    final UserDao userDao = new UserDaoJDBCImpl(connection);
+    final UserDao userDao = new UserDaoJDBCImpl();
 
     public void createUsersTable() {
         userDao.createUsersTable();

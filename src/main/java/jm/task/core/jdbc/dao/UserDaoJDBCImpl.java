@@ -1,6 +1,7 @@
 package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.util.Util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,8 +15,12 @@ public class UserDaoJDBCImpl implements UserDao {
 
     Connection connection;
 
-    public UserDaoJDBCImpl(Connection connection) {
-        this.connection = connection;
+    public UserDaoJDBCImpl() {
+        try {
+            connection = Util.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 public class Util {
 
+    static Connection connection = null;
+
     private Util() {
     }
 
@@ -15,10 +17,13 @@ public class Util {
     private static final String PASSWORD = "";
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+        if (connection == null) {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        }
+        return connection;
     }
 
-    public static void closeConnection(Connection connection) {
+    public static void closeConnection() {
         if (connection != null) {
             try {
                 connection.close();
